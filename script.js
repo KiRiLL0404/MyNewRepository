@@ -1,15 +1,31 @@
+'use strict'
+
 let title = prompt("Как называется ваш проект?");
 let screens = prompt("Какие типы экранов нужно разработать?");
 let screenPrice = +prompt("Сколько будет стоить данная работа?");
-let rollback = Math.random();
 let adaptive = !!prompt("Нужен ли адаптив на сайте?");
 let service1 = prompt("Какой дополнительный тип услуги нужен?");
 let servicePrice1 = +prompt("Сколько это будет стоить?");
 let service2 = prompt("Какой дополнительный тип услуги нужен?");
 let servicePrice2 = +prompt("Сколько это будет стоить?");
-let fullPrice = screenPrice + servicePrice1 + servicePrice2;
-let servicePercentPrice = Math.ceil(fullPrice + (fullPrice * rollback));
+let rollback = Math.random();
 
+const getAllServicePrices = function (additionalService1, additionalService2) {
+    return additionalService1 + additionalService2;
+}
+
+function getFullPrice(costOfAdditionalServices, layoutCost) {
+    return costOfAdditionalServices + layoutCost;
+}
+
+const getServicePercentPrices = function (rollbackPercentage, finalCost) {
+    return finalCost - (finalCost * rollbackPercentage);
+}
+
+
+let allServicePrices = getAllServicePrices(servicePrice1, servicePrice2);
+let fullPrice = getFullPrice(allServicePrices, screenPrice);
+let servicePercentPrice = getServicePercentPrices(rollback, fullPrice);
 /*console.log(typeof title);
 console.log(typeof fullPrice);
 console.log(typeof adaptive);
