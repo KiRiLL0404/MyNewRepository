@@ -10,6 +10,10 @@ let service2 = prompt("Какой дополнительный тип услуг
 let servicePrice2 = +prompt("Сколько это будет стоить?");
 let rollback = Math.random();
 
+let allServicePrices;
+let fullPrice;
+let servicePercentPrice;
+
 const getAllServicePrices = function (additionalService1, additionalService2) {
     return additionalService1 + additionalService2;
 }
@@ -22,26 +26,24 @@ const getServicePercentPrices = function (rollbackPercentage, finalCost) {
     return finalCost - (finalCost * rollbackPercentage);
 }
 
+const showTypeOf = function (variabole) {
+    console.log(variabole, typeof variabole);
+}
 
-let allServicePrices = getAllServicePrices(servicePrice1, servicePrice2);
-let fullPrice = getFullPrice(allServicePrices, screenPrice);
-let servicePercentPrice = getServicePercentPrices(rollback, fullPrice);
-/*console.log(typeof title);
-console.log(typeof fullPrice);
-console.log(typeof adaptive);
+const getRollbackMessage = function (price) {
+    if (price >= 30000) return "Даем скидку в 10%"
+    else if (price >= 15000) return "Даем скидку в 5%"
+    else if (price >= 0) return "Скидка не предусмотрена"
+    else return "Что то пошло не так"
+}
 
-console.log(screens.length);
+allServicePrices = getAllServicePrices(servicePrice1, servicePrice2);
+fullPrice = getFullPrice(allServicePrices, screenPrice);
+servicePercentPrice = getServicePercentPrices(rollback, fullPrice);
 
-console.log("Стоимость верстки экранов " + screenPrice + " рублей");
+showTypeOf(title);
+showTypeOf(fullPrice);
+showTypeOf(adaptive);
 
-console.log("Стоимость разработки сайта " + fullPrice + " рублей");
-console.log((screens.toLowerCase()).split(", "));
-*/
-console.log(servicePercentPrice);
-
-if (fullPrice >= 30000) console.log("Даем скидку в 10%");
-else if (fullPrice >= 15000) console.log("Даем скидку в 5%");
-else if (fullPrice >= 0) console.log("Скидка не предусмотрена");
-else console.log("Что то пошло не так");
-
-
+console.log(screens);
+console.log(getRollbackMessage(fullPrice));
