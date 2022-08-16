@@ -1,13 +1,13 @@
 'use strict'
 
 let title = prompt("Как называется ваш проект?");
-let screens = prompt("Какие типы экранов нужно разработать?");
-let screenPrice = +prompt("Сколько будет стоить данная работа?");
-let adaptive = !!prompt("Нужен ли адаптив на сайте?");
-let service1 = prompt("Какой дополнительный тип услуги нужен?");
-let servicePrice1 = +prompt("Сколько это будет стоить?");
-let service2 = prompt("Какой дополнительный тип услуги нужен?");
-let servicePrice2 = +prompt("Сколько это будет стоить?");
+const screens = prompt("Какие типы экранов нужно разработать?");
+const screenPrice = +prompt("Сколько будет стоить данная работа?");
+let adaptive = prompt("Нужен ли адаптив на сайте?");
+const service1 = prompt("Какой дополнительный тип услуги нужен?");
+const servicePrice1 = +prompt("Сколько это будет стоить?");
+const service2 = prompt("Какой дополнительный тип услуги нужен?");
+const servicePrice2 = +prompt("Сколько это будет стоить?");
 let rollback = Math.random();
 
 let allServicePrices;
@@ -37,13 +37,26 @@ const getRollbackMessage = function (price) {
     else return "Что то пошло не так"
 }
 
+const getTitle = function (str) {
+    if (str.indexOf(" ") == 0) {
+        return str[0] + str[1].toLocaleUpperCase() + (str.slice(2)).toLocaleLowerCase();
+    }
+    return str[0].toLocaleUpperCase() + (str.slice(1)).toLocaleLowerCase();
+}
+
+
+
 allServicePrices = getAllServicePrices(servicePrice1, servicePrice2);
 fullPrice = getFullPrice(allServicePrices, screenPrice);
 servicePercentPrice = getServicePercentPrices(rollback, fullPrice);
+
+if (adaptive.toLocaleLowerCase() == "нет" || adaptive.toLocaleLowerCase() == "no") adaptive = false;
+else adaptive = true;
 
 showTypeOf(title);
 showTypeOf(fullPrice);
 showTypeOf(adaptive);
 
+console.log(getTitle(title));
 console.log(screens);
 console.log(getRollbackMessage(fullPrice));
