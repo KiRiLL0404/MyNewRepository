@@ -57,6 +57,5 @@ showTypeOf(title);
 showTypeOf(fullPrice);
 showTypeOf(adaptive);
 
-console.log(getTitle(title));
 console.log(screens);
 console.log(getRollbackMessage(fullPrice));
