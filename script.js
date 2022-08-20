@@ -69,6 +69,9 @@ let appData = {
         console.log(appData.fullPrice);
         console.log(appData.servicePercentPrice);
         console.log(appData.getRollbackMessage(appData.fullPrice));
+        for (let key in appData) {
+            console.log("Ключ: " + key + " Значение :" + appData[key]);
+        }
     },
 
     start: function () {
