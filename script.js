@@ -1,7 +1,7 @@
 'use strict'
 const appData = {
     title: "",
-    screens: "",
+    screens: [],
     screenPrice: 0,
     adaptive: true,
     services: {},
@@ -18,18 +18,38 @@ const appData = {
     },
 
     asking: function () {
-        appData.title = prompt("Как называется ваш проект?", "Калькулятор");
-        appData.screens = prompt("Какие типы экранов нужно разработать?", "Простые, сложные");
-
         do {
-            appData.screenPrice = prompt("Сколько будет стоить данная работа?", 1500);
-        } while (!appData.isNumber(appData.screenPrice))
+            appData.title = prompt("Как называется ваш проект?", "Калькулятор");
+        } while (appData.isNumber(appData.title))
+
 
         appData.adaptive = confirm("Нужен ли адаптив на сайте?");
 
-        let price = 0;
         for (let i = 0; i < 2; i++) {
-            let name = prompt("Какой дополнительный тип услуги нужен?");
+            let name = "";
+            do {
+                name = prompt("Какие типы экранов нужно разработать?", "Простые, сложные");
+            } while (appData.isNumber(name))
+            let price = 0;
+
+            do {
+                price = prompt("Сколько будет стоить данная работа?", 1500);
+            } while (!appData.isNumber(price))
+
+            appData.screens.push({ id: i, name: name, price: +price });
+        }
+
+        appData.screenPrice = appData.screens.reduce((sPrice, screen) => {
+            sPrice.price += screen.price;
+            return sPrice.price;
+        });
+
+        for (let i = 0; i < 2; i++) {
+            let name = "";
+            do {
+                name = prompt("Какой дополнительный тип услуги нужен?");
+            } while (appData.isNumber(name))
+
             let price = 0;
 
             do {
@@ -41,7 +61,13 @@ const appData = {
 
     },
 
-    getAllServicePrices: function () {
+    addPrices: function () {
+
+        appData.screenPrice = appData.screens.reduce((sPrice, screen) => {
+            sPrice.price += screen.price;
+            return sPrice.price;
+        });
+
         for (let key in appData.services) {
             appData.allServicePrices += appData.services[key];
         }
@@ -70,14 +96,11 @@ const appData = {
         console.log(appData.fullPrice);
         console.log(appData.servicePercentPrice);
         console.log(appData.getRollbackMessage(appData.fullPrice));
-        for (let key in appData) {
-            console.log("Ключ: " + key + " Значение :" + appData[key]);
-        }
     },
 
     start: function () {
         appData.asking();
-        appData.getAllServicePrices();
+        appData.addPrices();
         appData.getFullPrice();
         appData.getServicePercentPrices();
         appData.logger();
