@@ -15,7 +15,7 @@ let fullPrice;
 let servicePercentPrice;
 
 const isNamber = function (num) {
-    return !isNaN(num) && isFinite(num)
+    return !isNaN(parseFloat(num)) && isFinite(num)
 }
 
 const asking = function () {
@@ -43,11 +43,11 @@ const getAllServicePrices = function () {
 
         sum += +price;
     }
-    return sum
+    return sum;
 }
 
 function getFullPrice() {
-    return allServicePrices + screenPrice;
+    return +screenPrice + allServicePrices;
 }
 
 const getServicePercentPrices = function () {
@@ -71,8 +71,8 @@ const getTitle = function (str) {
 
 asking();
 
-allServicePrices = getAllServicePrices();
-fullPrice = getFullPrice();
+allServicePrices = +getAllServicePrices();
+fullPrice = +getFullPrice();
 servicePercentPrice = getServicePercentPrices();
 
 
@@ -81,5 +81,5 @@ showTypeOf(fullPrice);
 showTypeOf(adaptive);
 
 
-console.log(screens);
+console.log(fullPrice);
 console.log(getRollbackMessage(fullPrice));
