@@ -1,12 +1,11 @@
 'use strict'
-let appData = {
+const appData = {
     title: "",
     screens: "",
     screenPrice: 0,
     adaptive: true,
-    service1: "",
+    services: {},
     servicePrice1: 0,
-    service2: "",
     servicePrice2: 0,
     rollback: Math.round(Math.random() * 100),
 
@@ -14,7 +13,7 @@ let appData = {
     fullPrice: 0,
     servicePercentPrice: 0,
 
-    isNamber: function (num) {
+    isNumber: function (num) {
         return !isNaN(parseFloat(num)) && isFinite(num)
     },
 
@@ -24,34 +23,36 @@ let appData = {
 
         do {
             appData.screenPrice = prompt("Сколько будет стоить данная работа?", 1500);
-        } while (!appData.isNamber(appData.screenPrice))
+        } while (!appData.isNumber(appData.screenPrice))
 
         appData.adaptive = confirm("Нужен ли адаптив на сайте?");
-    },
 
-    getAllServicePrices: function () {
-        let sum = 0;
         let price = 0;
         for (let i = 0; i < 2; i++) {
-            if (i === 0) {
-                appData.service1 = prompt("Какой дополнительный тип услуги нужен?");
-            } else if (i === 1) appData.service2 = prompt("Какой дополнительный тип услуги нужен?");
+            let name = prompt("Какой дополнительный тип услуги нужен?");
+            let price = 0;
 
             do {
                 price = prompt("Сколько это будет стоить?");
-            } while (!appData.isNamber(price))
+            } while (!appData.isNumber(price))
 
-            sum += +price;
+            appData.services[name + i] = +price;
         }
-        return sum;
+
+    },
+
+    getAllServicePrices: function () {
+        for (let key in appData.services) {
+            appData.allServicePrices += appData.services[key];
+        }
     },
 
     getFullPrice: function () {
-        return +(appData.screenPrice) + (appData.allServicePrices);
+        appData.fullPrice = +(appData.screenPrice) + (appData.allServicePrices);
     },
 
     getServicePercentPrices: function () {
-        return appData.fullPrice - (appData.fullPrice * (appData.rollback / 100));
+        appData.servicePercentPrice = appData.fullPrice - (appData.fullPrice * (appData.rollback / 100));
     },
 
     getRollbackMessage: function (price) {
@@ -76,9 +77,9 @@ let appData = {
 
     start: function () {
         appData.asking();
-        appData.allServicePrices = +(appData.getAllServicePrices());
-        appData.fullPrice = appData.getFullPrice();
-        appData.servicePercentPrice = appData.getServicePercentPrices();
+        appData.getAllServicePrices();
+        appData.getFullPrice();
+        appData.getServicePercentPrices();
         appData.logger();
     }
 
