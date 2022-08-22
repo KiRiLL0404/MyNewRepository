@@ -39,10 +39,9 @@ const appData = {
             appData.screens.push({ id: i, name: name, price: +price });
         }
 
-        appData.screenPrice = appData.screens.reduce((sPrice, screen) => {
-            sPrice.price += screen.price;
-            return sPrice.price;
-        });
+        appData.screenPrice = appData.screens.reduce(function (sPrice, screen) {
+            return sPrice + screen.price;
+        }, 0);
 
         for (let i = 0; i < 2; i++) {
             let name = "";
