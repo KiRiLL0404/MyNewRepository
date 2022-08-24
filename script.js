@@ -1,8 +1,10 @@
 'use strict'
 
-const tagName = document.getElementsByTagName('h1')[0].textContent;
+const tagName = document.getElementsByTagName('h1')[0];
 
-const classItems = document.getElementsByClassName("handler_btn");
+const buttonStart = document.getElementsByClassName("handler_btn")[0];
+
+const buttonReset = document.getElementsByClassName("handler_btn")[1];
 
 const plusItem = document.querySelector('.screen-btn');
 
@@ -14,15 +16,15 @@ const inputType = document.querySelector('.rollback > div > input');
 
 const spanItem = document.querySelector('.rollback > div > .range-value');
 
-const totalInputItem0 = document.getElementsByClassName('total-input')[0];
-const totalInputItem1 = document.getElementsByClassName('total-input')[1];
-const totalInputItem2 = document.getElementsByClassName('total-input')[2];
-const totalInputItem3 = document.getElementsByClassName('total-input')[3];
-const totalInputItem4 = document.getElementsByClassName('total-input')[4];
+const inputTotal = document.getElementsByClassName('total-input')[0];
+const inputTotalCount = document.getElementsByClassName('total-input')[1];
+const inputTotalCountOther = document.getElementsByClassName('total-input')[2];
+const inputTotalFullCount = document.getElementsByClassName('total-input')[3];
+const inputTotalCountRollback = document.getElementsByClassName('total-input')[4];
 
 let screenItems = document.querySelectorAll(".screen");
 
-console.log(screenItems);
+console.log(spanItem);
 
 const appData = {
     title: "",
