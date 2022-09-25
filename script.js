@@ -1,30 +1,39 @@
-'use strict'
+'use strict';
 
-const tagName = document.getElementsByTagName('h1')[0];
+document.body.style.backgroundImage = 'url(./image/open_book.jpg)';
 
-const buttonStart = document.getElementsByClassName("handler_btn")[0];
+const books = document.querySelectorAll('.book');
 
-const buttonReset = document.getElementsByClassName("handler_btn")[1];
+/*books[1].after(books[0]);
+books[5].after(books[2]);
+books[4].after(books[3]);
+*/
+const bookTwo = books[0].querySelectorAll('li');
 
-const plusItem = document.querySelector('.screen-btn');
+bookTwo[3].after(bookTwo[6]);
+bookTwo[6].after(bookTwo[8]);
+bookTwo[9].after(bookTwo[2]);
 
-const otherItemsPercent = document.querySelectorAll(".other-items.percent");
+const bookFive = books[5].querySelectorAll('li');
 
-const otherItemsNumber = document.querySelectorAll(".other-items.number");
+bookFive[1].after(bookFive[9]);
+bookFive[9].after(bookFive[3]);
+bookFive[3].after(bookFive[4]);
+bookFive[8].before(bookFive[5]);
 
-const inputType = document.querySelector('.rollback > div > input');
+const newChapter = document.createElement('li');
 
-const spanItem = document.querySelector('.rollback > div > .range-value');
+newChapter.textContent = 'Глава 8: За пределами ES6';
 
-const inputTotal = document.getElementsByClassName('total-input')[0];
-const inputTotalCount = document.getElementsByClassName('total-input')[1];
-const inputTotalCountOther = document.getElementsByClassName('total-input')[2];
-const inputTotalFullCount = document.getElementsByClassName('total-input')[3];
-const inputTotalCountRollback = document.getElementsByClassName('total-input')[4];
+const bookSix = books[2].querySelectorAll('li');
 
-let screenItems = document.querySelectorAll(".screen");
+bookSix.append("Глава 8: За пределами ES6");
 
-console.log(spanItem);
+document.querySelector('.adv').remove();
+
+books[4].querySelector('a').innerHTML = 'Книга 3. this и Прототипы Объектов';
+
+console.log(bookSix);
 
 const appData = {
     title: "",
@@ -41,13 +50,13 @@ const appData = {
     servicePercentPrice: 0,
 
     isNumber: function (num) {
-        return !isNaN(parseFloat(num)) && isFinite(num)
+        return !isNaN(parseFloat(num)) && isFinite(num);
     },
 
     asking: function () {
         do {
             appData.title = prompt("Как называется ваш проект?", "Калькулятор");
-        } while (appData.isNumber(appData.title))
+        } while (appData.isNumber(appData.title));
 
 
         appData.adaptive = confirm("Нужен ли адаптив на сайте?");
@@ -56,12 +65,12 @@ const appData = {
             let name = "";
             do {
                 name = prompt("Какие типы экранов нужно разработать?", "Простые, сложные");
-            } while (appData.isNumber(name))
+            } while (appData.isNumber(name));
             let price = 0;
 
             do {
                 price = prompt("Сколько будет стоить данная работа?", 1500);
-            } while (!appData.isNumber(price))
+            } while (!appData.isNumber(price));
 
             appData.screens.push({ id: i, name: name, price: +price });
         }
@@ -74,13 +83,13 @@ const appData = {
             let name = "";
             do {
                 name = prompt("Какой дополнительный тип услуги нужен?");
-            } while (appData.isNumber(name))
+            } while (appData.isNumber(name));
 
             let price = 0;
 
             do {
                 price = prompt("Сколько это будет стоить?");
-            } while (!appData.isNumber(price))
+            } while (!appData.isNumber(price));
 
             appData.services[name + i] = +price;
         }
