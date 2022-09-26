@@ -4,10 +4,10 @@ document.body.style.backgroundImage = 'url(./image/open_book.jpg)';
 
 const books = document.querySelectorAll('.book');
 
-/*books[1].after(books[0]);
+books[1].after(books[0]);
 books[5].after(books[2]);
 books[4].after(books[3]);
-*/
+
 const bookTwo = books[0].querySelectorAll('li');
 
 bookTwo[3].after(bookTwo[6]);
@@ -27,7 +27,7 @@ newChapter.textContent = 'Глава 8: За пределами ES6';
 
 const bookSix = books[2].querySelectorAll('li');
 
-bookSix.append("Глава 8: За пределами ES6");
+bookSix[9].insertAdjacentElement('beforebegin', newChapter);
 
 document.querySelector('.adv').remove();
 
